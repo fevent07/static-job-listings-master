@@ -8,7 +8,6 @@ const categoryFilter = document.querySelector(".category--filter");
 let selectedFilter = [];
 
 data.map((objValue) => {
-  // TODO: Jobs listing
 
   let html = `<section class="${objValue.company}--container relative mt-10 flex w-full flex-col items-center justify-between rounded ${
     objValue.new && objValue.featured
@@ -108,8 +107,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!clickedTablet) return;
 
     let textContent = clickedTablet.textContent;
-
-    // remove hidden class
     filterContainer.classList.remove("hide");
     filterContainer.classList.add("show");
 
@@ -120,13 +117,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 const renderFilter = function (value) {
-  //push clicked tablets to array
-  // checking to see if the same tablet was clicked twice any where in the DOM
-  if (selectedFilter.includes(value)) return "";
+   if (selectedFilter.includes(value)) return "";
 
   selectedFilter.push(value);
 
-  return `<div class="selected--filter hide flex cursor-pointer items-center rounded bg-lightGrayishCyanFilter">
+  return `<div class="selected--filter flex cursor-pointer items-center rounded bg-lightGrayishCyanFilter">
         <span class="px-2 font-bold text-desaturatedDarkCyan">${value}</span>
         <figure class="h-full rounded-r bg-desaturatedDarkCyan px-2 py-2 hover:bg-veryDarkGrayishCyan">
             <img src="./images/icon-remove.svg" alt="icon-remove" />
@@ -139,8 +134,7 @@ const filterJobs = function () {
   let filteredSections = [];
 
   section.forEach((sect) => {
-    // * converting to an iterable nodelist of children element(span)
-    childEl = Array.from(sect.lastElementChild.children);
+      childEl = Array.from(sect.lastElementChild.children);
     if (
       selectedFilter.every((element) =>
         childEl.some((child) => child.textContent === element)
@@ -162,10 +156,8 @@ filterContainer.addEventListener("click", function (e) {
 
   let textContentValue = clickedEl.firstElementChild.textContent;
 
-  // accessing the index of the selected content
   const index = selectedFilter.indexOf(textContentValue);
 
-  // if true
   if (index > -1) selectedFilter.splice(index, 1);
 
   clickedEl.remove();
@@ -186,20 +178,3 @@ clearBtn.addEventListener("click", function () {
   selectedFilter = [];
   filterJobs();
 });
-
-// modal window section
-
-// const modal = document.querySelector(".modal--window");
-// const overlay = document.querySelector(".overlay");
-
-// const closeModal = function () {
-//   overlay.classList.add("hide");
-//   modal.classList.add("hide");
-// };
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   overlay.addEventListener("click", closeModal);
-
-//   // should incase the user doesn't click the overlay
-//   setTimeout(() => closeModal(), 10000);
-// });
