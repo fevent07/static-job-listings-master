@@ -1,5 +1,5 @@
 "use strict";
-import data from "../data.json" assert { type: "json" };
+import data from "./data.json" assert { type: "json" };
 
 let sectionContainer = document.querySelector(".section--container");
 const filterContainer = document.querySelector(".filter--container");
