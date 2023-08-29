@@ -11,11 +11,11 @@
   </head>
   <body class="relative h-full w-full bg-lightGrayishCyanBG">
     <header class="h-[25vh] w-full bg-desaturatedDarkCyan bg-[url('/images/bg-header-mobile.svg')] bg-cover bg-center bg-no-repeat md:bg-[url('/images/bg-header-desktop.svg')]"></header>
-    <main class="mx-8 mb-8 max-w-full md:container md:mx-auto">
-      <div class="filter--container show flex h-auto w-full translate-y-[-40px] items-center justify-between rounded bg-white px-4 py-3">
+    <main class="mx-8 mb-8 max-w-full md:w-[1000px] md:container md:mx-auto">
+      <div class="filter--container hide flex h-auto w-full translate-y-[-40px] items-center justify-between rounded bg-white px-4 py-3" style="display:none" id="searchContainer">
         <div class="category--filter flex flex-wrap items-center gap-[0.5rem]">
         </div>
-        <button class="cursor-pointer font-bold text-darkGrayishCyan hover:text-desaturatedDarkCyan hover:underline">Clear
+        <button class="cursor-pointer flex font-bold text-darkGrayishCyan hover:text-desaturatedDarkCyan hover:underline" id="clearBut">Clear
         </button>
       </div>
       <div class="section--container"></div>

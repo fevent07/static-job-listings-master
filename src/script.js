@@ -14,7 +14,7 @@ data.map((objValue) => {
       ? `border-l-[5px] border-l-desaturatedDarkCyan`
       : ""
     }  bg-white px-4 py-3 md:flex-row">
-          <div class="info--container flex w-full items-center md:w-1/2">
+          <div class="info--container flex w-full h-[8rem] items-center md:w-1/2">
             <figure class="absolute w-[40px] translate-y-[-62px] md:relative md:mr-6 md:w-[80px] md:translate-y-0">
               <img
                 src="${objValue.logo}"
@@ -105,38 +105,35 @@ document.addEventListener("DOMContentLoaded", function () {
     let clickedTablet = e.target.closest(".tablet");
 
     if (!clickedTablet) return;
-
+//show  the filter section
     let textContent = clickedTablet.textContent;
-    filterContainer.classList.remove("hide");
-    filterContainer.classList.add("show");
-
     categoryFilter.innerHTML += renderFilter(textContent);
-
+    let section = document.getElementById('searchContainer');
+    section.style.display = 'flex';
     filterJobs();
   });
 });
-
+//show the clicked skills
 const renderFilter = function (value) {
    if (selectedFilter.includes(value)) return "";
-
-  selectedFilter.push(value);
-
-  return `<div class="selected--filter flex cursor-pointer items-center rounded bg-lightGrayishCyanFilter">
-        <span class="px-2 font-bold text-desaturatedDarkCyan">${value}</span>
-        <figure class="h-full rounded-r bg-desaturatedDarkCyan px-2 py-2 hover:bg-veryDarkGrayishCyan">
-            <img src="./images/icon-remove.svg" alt="icon-remove" />
-        </figure>
-  </div>`;
-};
-
-const filterJobs = function () {
-  let childEl;
-  let filteredSections = [];
-
-  section.forEach((sect) => {
+   selectedFilter.push(value);
+   
+   return `<div class="selected--filter flex cursor-pointer items-center rounded bg-lightGrayishCyanFilter">
+   <span class="px-2 font-bold text-desaturatedDarkCyan">${value}</span>
+   <figure class="h-full rounded-r bg-desaturatedDarkCyan px-2 py-2 hover:bg-veryDarkGrayishCyan">
+   <img src="./images/icon-remove.svg" alt="icon-remove" />
+   </figure>
+   </div>`;
+  };
+  //filtering the lists
+  const filterJobs = function () {
+    let childEl;
+    let filteredSections = [];
+    
+    section.forEach((sect) => {
       childEl = Array.from(sect.lastElementChild.children);
-    if (
-      selectedFilter.every((element) =>
+      if (
+        selectedFilter.every((element) =>
         childEl.some((child) => child.textContent === element)
       )
     ) {
@@ -148,29 +145,24 @@ const filterJobs = function () {
   filteredSections.forEach((el) => (htmlString += el.outerHTML));
   sectionContainer.innerHTML = htmlString;
 };
-
+// close button script  on eeach filtered skill
 filterContainer.addEventListener("click", function (e) {
-  let clickedEl = e.target.closest(".selected--filter");
-
-  if (!clickedEl) return;
-
-  let textContentValue = clickedEl.firstElementChild.textContent;
-
+  let clickedEl = e.target.closest(".selected--filter"); 
+  console.log("clciked");
+  if (!clickedEl) return; 
+  let textContentValue = clickedEl.firstElementChild.textContent; 
   const index = selectedFilter.indexOf(textContentValue);
-
   if (index > -1) selectedFilter.splice(index, 1);
-
   clickedEl.remove();
   filterJobs();
-
-  if (categoryFilter.children.length === 0) hideContainer();
 });
 
+
 const hideContainer = function () {
-  // remove hidden class
-  filterContainer.classList.add("hide");
-  filterContainer.classList.remove("show");
+  // remove filter using clear button
   categoryFilter.innerHTML = "";
+  let section = document.getElementById('searchContainer');
+  section.style.display = 'none';
 };
 
 clearBtn.addEventListener("click", function () {
